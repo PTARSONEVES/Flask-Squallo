@@ -1,0 +1,12 @@
+#Home{
+    background-image: url("/static/images/home-tubarao-01.jpg");
+    object-fit: cover;
+    color: cyan;
+}
+
+#Home img{
+    width: 500px;
+    height: 300px;
+    object-fit: contain;
+    object-position: bottom;
+}

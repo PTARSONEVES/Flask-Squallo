@@ -1,4 +1,4 @@
-#Home{
+body{
     background-image: url("/static/images/home-tubarao-01.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -12,10 +12,13 @@
     text-align: center;
     top: 0;
     background-size: cover;
+}
+
+#homepage{
     color: cyan;
 }
 
-#Home footer  li,p{
+#Homepage footer  li,p{
     color:black;
     font-size: 15px;
     font-weight: bold;

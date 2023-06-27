@@ -9,4 +9,4 @@ mysqlclient
 wtforms
 email_validator
 datetime
-dotenv
+python-dotenv

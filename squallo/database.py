@@ -1,21 +1,23 @@
 from sqlalchemy import create_engine, text
 
 
-engine =create_engine("mysql://ptarsoneves:Strolandia1@database-1.cizel514jz3i.us-east-2.rds.amazonaws.com/py_squallo?charset=utf8m4")
+engine =create_engine("mysql://ptarsoneves:Strolandia1@database-1.cizel514jz3i.us-east-2.rds.amazonaws.com/py_squallo")
 
-def cadastra_usuario(nome,email,senha):
+def cadastra_usuario(usuario,email,senha,criacao):
    with engine.connect() as conn:
       query = text(
-         f"INSERT INTO users (name,email,password) VALUES (:nome,:email,:senha)"
+         f"INSERT INTO users (usuario,email,password,created_at,updated_at) VALUES (:usuario,:email,:senha,:dado1,:dado2)"
       )
       conn.execute(
-         query,{
-            'name': nome,
+         query,[{
+            'usuario': usuario,
             'email': email,
-            'senha': senha
-         }
+            'senha': senha,
+            'dado1': criacao,
+            'dado2': criacao 
+         }]
       )
-      print(nome)
+      print(usuario)
       conn.commit()
 
 def carrega_vagas_db():

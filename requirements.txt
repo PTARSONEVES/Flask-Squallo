@@ -6,3 +6,5 @@ flask_login
 flask_wtf
 mysqlclient
 wtforms
+email_validator
+datetime

@@ -4,6 +4,7 @@ from database import cadastra_usuario, obtem_usuario
 from forms import CadastroForm, LoginForm
 from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
+from models import User
 
 @app.route("/")
 def page_home():
@@ -32,22 +33,17 @@ def page_login():
     if form.validate_on_submit():
         usuario = form.usuario.data
         senha = form.senha.data
-        usuario_logado = obtem_usuario(usuario)
+        usuario_logado = User.query.filter_by(usuario=usuario).first()
         if usuario_logado == None:
             return redirect(url_for('page_cadastro'))
         else:
-            senha_usuario = usuario_logado['password']
+            senha_usuario = usuario_logado.senha
             senha_confere = bcrypt.check_password_hash(senha_usuario,senha)
             if senha_confere:
-                print("Usuario Logado")
+                login_user(usuario_logado)
+                return redirect(url_for('page_home'))
             else:
                 print("Senha não confere")
-
-#        usuario_logado = User.query.filter_by(usuario = form.usuario.data).first()
-#        if usuario_logado and usuario_logado.converte_senha(senha_texto_claro=form.senha.data):
-#            login_user(usuario_logado)
-#            flash(f'Sucesso! Seu login é: {usuario_logado.usuario}', category='success')
-#            return redirect(url_for('page_produto'))
 #        else:
 #            flash(f'Usuário e/ou senha incorreto(s)! Tente novamente.', category='danger')
     return render_template('login.html',titulopagina='Página de Login',idpage='loginpage',form=form)

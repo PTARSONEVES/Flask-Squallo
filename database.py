@@ -3,22 +3,23 @@ from flask import jsonify
 from app import login_manager
 from flask_login import UserMixin
 from dotenv import load_dotenv
+from models import User
 import os
 
-@login_manager.user_loader
-def load_user(user_id):
-    return Users.query.get(int(user_id))
+#@login_manager.user_loader
+#def load_user(user_id):
+#    return User.get(user_id)
 
 load_dotenv()
-
 
 engine =create_engine(os.getenv('MYSQLCONECT'))
 #engine =create_engine("mysql://ptarsoneves:Strolandia1@database-1.cizel514jz3i.us-east-2.rds.amazonaws.com/py_squallo")
 
+
 def cadastra_usuario(usuario,email,senha,criacao):
    with engine.connect() as conn:
       query = text(
-         f"INSERT INTO users (usuario,email,password,created_at,updated_at) VALUES (:usuario,:email,:senha,:dado1,:dado2)"
+         f"INSERT INTO user (usuario,email,senha,created_at,updated_at) VALUES (:usuario,:email,:senha,:dado1,:dado2)"
       )
       conn.execute(
          query,[{
@@ -35,14 +36,14 @@ def cadastra_usuario(usuario,email,senha,criacao):
 def obtem_usuario(usuario):
    with engine.connect() as conn:
       query = text(
-         f"SELECT * FROM users WHERE usuario = :usuario" 
+         f"SELECT * FROM user WHERE usuario = :usuario" 
       )
       resultado = conn.execute(query,{'usuario': usuario})
       registro = resultado.mappings().all()
       if len(registro) == 0:
          return None
       else:
-         return dict(registro[0])
+         return registro
 
 def carrega_vagas_db():
   with engine.connect() as conn:

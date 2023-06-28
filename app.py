@@ -17,4 +17,4 @@ login_manager.login_view = "page_login"
 login_manager.login_message = "Por favor, realize seu login"
 login_manager.login_message_category = "info"
 
-import routes, database
+import routes, models

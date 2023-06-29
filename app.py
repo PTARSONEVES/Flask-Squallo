@@ -5,11 +5,19 @@ from flask_login import LoginManager
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
+CREDENCIAIS = {
+    'mysql' : os.getenv('MYSQLCONECT'),
+    'secret' : os.getenv('SECRET_KEY')
+}
+
+
 db = SQLAlchemy()
 login_manager = LoginManager()
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://ptarsoneves:Strolandia1@database-1.cizel514jz3i.us-east-2.rds.amazonaws.com/py_squallo"
-app.config["SECRET_KEY"] = '71ca79b597f1dd9c15f77b12'
+app.config["SQLALCHEMY_DATABASE_URI"] = CREDENCIAIS.get('mysql')
+app.config["SECRET_KEY"] = CREDENCIAIS.get('secret')
 db.init_app(app)
 bcrypt = Bcrypt(app)
 login_manager.init_app(app)

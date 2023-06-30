@@ -14,10 +14,20 @@
                 <a class="nav-link" href="#">Pricing</a>
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </div>
+            {% if current_user.is_authenticated %}
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" style="color: lawngreen; font-weigth: bold;">
+                    <i class="fa-regular fa-user"></i> 
+                    Bem vindo, {{ current_user.usuario }}
+                </a>
+                <a class="nav-link" href="{{ url_for('page_logout') }}">Logout</a>
+            </div>
+            {% else %}
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="{{ url_for('page_login') }}">Login</a>
                 <a class="nav-link" href="{{ url_for('page_cadastro') }}">Cadastro</a>
             </div>
+            {% endif %}
         </div>    
     </div>
 </nav>

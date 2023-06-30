@@ -47,3 +47,8 @@ def page_login():
 #        else:
 #            flash(f'Usuário e/ou senha incorreto(s)! Tente novamente.', category='danger')
     return render_template('login.html',titulopagina='Página de Login',idpage='loginpage',form=form)
+
+@app.route("/logout")
+def page_logout():
+    logout_user()
+    return redirect(url_for('page_home'))

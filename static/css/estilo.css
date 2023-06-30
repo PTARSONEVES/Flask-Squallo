@@ -1,25 +1,33 @@
+body, html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    min-width: 400px;
+}
+
 body{
-    background-image: url("/static/images/home-tubarao-01.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    bottom: 0;
-    color: black;
-    left: 0;
-    overflow: auto;
-    padding: 3em;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    background-size: cover;
+    background: #202124 !important;
+}
+
+body{
+    display: block;
 }
 
 #homepage{
     color: cyan;
 }
-
-#Homepage footer  li,p{
-    color:black;
+#Homepage footer{
     font-size: 15px;
     font-weight: bold;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
 }

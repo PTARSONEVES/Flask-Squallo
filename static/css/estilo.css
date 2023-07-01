@@ -1,29 +1,6 @@
-body, html{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-html, body{
-    min-width: 400px;
-}
-
 body{
     background: #202124 !important;
 }
-
-body{
-    display: block;
-}
-
-#homepage{
-    color: cyan;
-}
-#Homepage footer{
-    font-size: 15px;
-    font-weight: bold;
-}
-
 
 footer {
     position: absolute;

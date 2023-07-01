@@ -5,6 +5,9 @@ from forms import CadastroForm, LoginForm
 from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
 from models import User
+from ftoken import generate_confirmation_token, confirm_token
+
+
 
 @app.route("/")
 def page_home():
@@ -21,11 +24,31 @@ def page_cadastro():
         senha = bcrypt.generate_password_hash(senha_ini).decode('utf-8')
         criacao = str(data_atual.strftime("%Y-%m-%d %H-%M-%S"))
         cadastra_usuario(usuario,email,senha,criacao)
+        token = generate_confirmation_token(email)
+        print(token)
         return redirect(url_for('page_home'))
     if form.errors != {}:
         for err in form.errors.values():
             print(f"Erro ao cadastrar usuário {err}")
     return render_template('cadastro.html',titulopagina='Cadastro de Usuário',idpage='cadusu',form=form)
+
+@app.route("/confirma/<token>")
+@login_required
+def confirma_email(token):
+    try:
+        email = confirma_email(token)
+    except:
+        flash('O link enviado é inválido ou está expirado.','danger')
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.confirmed:
+        flash('Conta já confirmada. Por favor, fça seu login!','success')
+    else: 
+        user.email_verified_at = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
+        flash('Sua conta já está confirmada. Obrigado!!!','success')
+    return redirect(url_for('page_home'))
+
 
 @app.route("/login",methods=['GET','POST'])
 def page_login():

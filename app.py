@@ -9,7 +9,8 @@ load_dotenv()
 
 CREDENCIAIS = {
     'mysql' : os.getenv('MYSQLCONECT'),
-    'secret' : os.getenv('SECRET_KEY')
+    'secret' : os.getenv('SECRET_KEY'),
+    'secsalt': os.getenv('SECURITY_PASSWORD_SALT')
 }
 
 

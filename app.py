@@ -10,7 +10,13 @@ load_dotenv()
 CREDENCIAIS = {
     'mysql' : os.getenv('MYSQLCONECT'),
     'secret' : os.getenv('SECRET_KEY'),
-    'secsalt': os.getenv('SECURITY_PASSWORD_SALT')
+    'secsalt': os.getenv('SECURITY_PASSWORD_SALT'),
+    'mailserver': os.getenv('MAIL_SERVER'),
+    'mailport': os.getenv('MAIL_PORT'),
+    'mailtls': os.getenv('MAIL_USE_TLS'),
+    'mailssl': os.getenv('MAIL_USE_SSL'),
+    'mailuser': os.getenv('MAIL_USERNAME'),
+    'mailpass': os.getenv('MAIL_PASSWORD')
 }
 
 
